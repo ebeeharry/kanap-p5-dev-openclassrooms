@@ -135,7 +135,6 @@ function deleteProduct() {
                             
                 // On pointe le parent hiérarchique <article> du lien "supprimer"
                 let myArticle = selectSupprimer.closest('article');
-                console.log(myArticle);
                 // on filtre les éléments du localStorage pour ne garder que ceux qui sont différents de l'élément qu'on supprime
                 productRegisterInLocalStorage = productRegisterInLocalStorage.filter
                 ( element => element.idProduct !== myArticle.dataset.id || element.colorProduct !== myArticle.dataset.color );
