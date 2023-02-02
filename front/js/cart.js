@@ -47,7 +47,6 @@ function totalProductsPrice (){
     // console.log(totalProductPricePanier);
     // Calcul du prix total du panier
     totalPrice += totalProductPricePanier;
-    console.log("Total prix panier",totalPrice);
     document.getElementById("totalPrice").innerText = totalPrice; 
     }
 
@@ -63,7 +62,6 @@ function recalculTotalQuantity() {
         //On calcul le nombre de quantité total de produits dans le localStorage
         newTotalQuantity += parseInt(item.quantityProduct);
     }
-        console.log("Nouvelle quantité totale panier",newTotalQuantity);
     //On affichage la nouvelle quantité totale de produits dans le html
     document.getElementById("totalQuantity").innerText = newTotalQuantity;
 }
@@ -83,7 +81,6 @@ function recalculTotalPrice() {
         if (findProducts) {
             const newTotalProductPricePanier = findProducts.price * quantityProductsLocalStorage;
             newTotalPrice += newTotalProductPricePanier;
-                console.log("Nouveau prix total panier",newTotalPrice);
         }
     //On affichage le nouveau prix total du panier dans le html
     document.getElementById("totalPrice").innerText = newTotalPrice;
@@ -102,7 +99,6 @@ function changeQuantity() {
             choiceQuantity = Number(item.value);
             // On pointe le parent hiérarchique <article> de l'input "itemQuantity"
             let myArticle = item.closest('article');
-                //console.log(myArticle);
             // On récupère dans le localStorage l'élément (même id et même couleur) dont on veut modifier la quantité
             let selectMyArticleInLocalStorage = productRegisterInLocalStorage.find
             ( element => element.idProduct === myArticle.dataset.id && element.colorProduct === myArticle.dataset.color );
@@ -437,7 +433,6 @@ else {
                 },
                 products: idProducts,
             } 
-               //console.log(order);
             // On indique la méthode d'envoi des données
             const options = {
                 method: 'POST',
@@ -447,7 +442,6 @@ else {
                 },
                 body: JSON.stringify(order)
             };
-                //console.log(options);
             // on envoie les données Contact et l'id des produits à l'API
             fetch("http://localhost:3000/api/products/order", options)
             .then((response) => response.json())
@@ -457,7 +451,6 @@ else {
                 document.location.href = `confirmation.html?orderId=${data.orderId}`;
             })
             .catch((err) => {
-                console.log("Erreur Fetch product.js", err);
                 alert ("Un problème a été rencontré lors de l'envoi du formulaire.");
             });
             //----------------------------------------------On vide le localStorage---------------------------------------------------------------
