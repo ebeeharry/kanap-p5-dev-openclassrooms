@@ -4,7 +4,6 @@ document.title = "Page Panier";
 //______Déclaration de la variable "productRegisterInLocalStorage" dans laquelle on met les keys et les values qui sont dans le local Storage______
 //-----------------JSON.parse c'est pour convertir les données au format JSON qui sont dans le localStorage en objet javascript--------------------
 let productRegisterInLocalStorage = JSON.parse(localStorage.getItem("produit"));
-    //console.log(productRegisterInLocalStorage);
 //--------------------Sélection de la balise de la page product.html dans laquel on va insérer les produits et leurs infos-------------------------
 const productsPositionHtml = document.getElementById("cart__items");
 
@@ -36,7 +35,6 @@ let errorFormulaireEmail = true;
 //----------------------Fonction Calcul de la quantité total d'articles dans le panier, au chargement de la page Panier.html-----------------
 function totalProductsQuantity(){
     totalQuantity += parseInt(quantityProductPanier);
-    console.log("Total quantité panier",totalQuantity);
     document.getElementById("totalQuantity").innerText = totalQuantity;
 }
 
@@ -76,7 +74,6 @@ function recalculTotalPrice() {
         const quantityProductsLocalStorage = item.quantityProduct;
         //(2) on vérifie si l'id correspond
         const findProducts = mesProduits.find((element) => element._id === idProductsLocalStorage);
-            //console.log(findProducts);
         //(3) et si c'est le cas, on récupère le prix.
         if (findProducts) {
             const newTotalProductPricePanier = findProducts.price * quantityProductsLocalStorage;
@@ -292,7 +289,6 @@ else {
           
                 //on ne récupère que les données des canapés dont _id (de l'api) correspondent à l'id dans le localStorage
                 const compositionProduitsPanier = data.find((element) => element._id === idProductPanier);
-                    // console.log(compositionProduitsPanier);
                 // Récupération du prix de chaque produit que l'on met dans une variable priceProductPanier
                 priceProductPanier = compositionProduitsPanier.price;
 
@@ -420,7 +416,6 @@ else {
             for (let l = 0; l<productRegisterInLocalStorage.length;l++) {
                 idProducts.push(productRegisterInLocalStorage[l].idProduct);
             }
-                //console.log(idProducts);
             // On cré un objet dans lequel on met les infos "Contact" et les infos "Produits du panier" (l'id)
             const order = {
                 contact: {
@@ -445,7 +440,6 @@ else {
             fetch("http://localhost:3000/api/products/order", options)
             .then((response) => response.json())
             .then((data) => {
-                    //console.log(data);
                 // on redirige vers la page de confirmation de commande en passant l'orderId (numéro de commande) dans l'URL
                 document.location.href = `confirmation.html?orderId=${data.orderId}`;
             })
