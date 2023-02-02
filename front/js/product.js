@@ -1,21 +1,11 @@
-// Récupération de la chaîne de requête dans l'URL
-    /*const queryStringUrl = window.location.search;
-    console.log(queryStringUrl);*/
-//Extraction de l'ID de l'URL
-/*const urlId = new URLSearchParams(queryStringUrl);
-console.log(urlId);
-const productId = urlId.get("id");*/
-
 // Récupération de la chaîne de requête dans l'URL du navigateur et Extraction de l'ID de l'URL
 const productId = new URLSearchParams(window.location.search).get("id");
-console.log(productId);
 
 // Si on a bien récupéré un id on récupère les données de l'API correspondant à cet id
 if (productId !== null){
 fetch(`http://localhost:3000/api/products/${productId}`)
   .then(response => response.json())
   .then(selectProduct => {
-    console.log(selectProduct);
 
 //Affichage sur la page product.html du canapé sélectionné sur la page d'accueil, à partir de l'id de l'URL
     // Ajout du nom du produit dans la balise title du navigateur
@@ -57,7 +47,6 @@ fetch(`http://localhost:3000/api/products/${productId}`)
             // Sélection de l'id pour le choix de la quantité et insertion de la quantité choisie par l'utilisateur dans une variable
             const quantity = document.querySelector("#quantity");
             choiceQuantity = Number(quantity.value);
-            console.log(choiceQuantity);
 
            // Récupération des données (id, couleur et quantité) après les choix faits par l'utilisateur,....
            //..... à condition que la couleur soit bien sélectionnée,.... 
@@ -69,7 +58,6 @@ fetch(`http://localhost:3000/api/products/${productId}`)
                     colorProduct: choiceColor ,
                     quantityProduct: choiceQuantity
                 }
-                console.log(optionsProduct);
                 //-------------------------------Le Local Storage--------------------------------------------
                 // On cré une variable pour afficher un message lors de l'ajout d'1 produit dans le localStorage
                 let messageLocalStorageUpdating = false;
@@ -112,13 +100,11 @@ fetch(`http://localhost:3000/api/products/${productId}`)
                  // si le localStorage contient déjà une clé "produit"
                 if(produitEnregistreDansLocalStorage){
                     addProductLocalStorage();
-                    console.log(produitEnregistreDansLocalStorage);
                 }
                 // si le localStorage est vide
                 else{
                     produitEnregistreDansLocalStorage = [];
                     addProductLocalStorage();
-                    console.log(produitEnregistreDansLocalStorage);
                     // On met la variable message sur false pour pouvoir afficher un message plus approprié
                     messageLocalStorageUpdating = false;
                     alert(`Félicitations !! Vous venez d'ajouter votre premier produit dans le panier ! `);
@@ -136,13 +122,11 @@ fetch(`http://localhost:3000/api/products/${productId}`)
         });
     })
     .catch((err) => {
-        console.log("Erreur Fetch product.js : l'id du produit est incorrect.", err);
         alert(`Le produit sélectionné n'a pas été trouvé !`);
         window.location.href = "index.html";
     })
 }
 else{
-    console.log("L'id du produit n'a pas été indiqué dans l'url.");
     alert(`Le produit sélectionné n'a pas été trouvé !`);
     window.location.href = "index.html";
  }
